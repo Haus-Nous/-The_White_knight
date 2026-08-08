@@ -47,8 +47,10 @@ export type ChatOptions = {
   jsonMode?: boolean;
 };
 
+import { ModelProvider } from "./model-settings";
+
 export type ProviderSettings = {
-  provider: "groq" | "openrouter" | "together" | "anthropic" | "openai";
+  provider: ModelProvider;
   model?: string;
   apiKey?: string;
 };
