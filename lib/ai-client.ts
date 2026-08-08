@@ -146,19 +146,19 @@ async function chatAnthropic(messages: ChatMessage[], opts: ChatOptions, apiKey:
 }
 
 export async function chat(messages: ChatMessage[], opts: ChatOptions = {}, provider?: ProviderSettings): Promise<string> {
+  const providerType = (provider?.provider as string) ?? "";
+
   // Check override or env variables in order of priority: Groq (Free) -> OpenRouter (Free) -> Together AI -> OpenAI -> Anthropic
-  const groqKey = provider?.provider === "groq" ? provider.apiKey : (process.env.GROQ_API_KEY || (provider?.apiKey && provider?.provider === "groq" ? provider.apiKey : undefined));
-  if (groqKey || provider?.provider === "groq") {
-    const key = groqKey || process.env.GROQ_API_KEY;
-    if (!key) throw new Error("GROQ_API_KEY is not set. Get a free API key at console.groq.com");
-    return chatOpenAICompatible(GROQ_BASE, key, "Groq AI", messages, opts, DEFAULT_GROQ_MODEL);
+  const groqKey = providerType === "groq" ? provider?.apiKey : process.env.GROQ_API_KEY;
+  if (groqKey || providerType === "groq") {
+    if (!groqKey) throw new Error("GROQ_API_KEY is not set. Get a free API key at console.groq.com");
+    return chatOpenAICompatible(GROQ_BASE, groqKey, "Groq AI", messages, opts, DEFAULT_GROQ_MODEL);
   }
 
-  const openRouterKey = provider?.provider === "openrouter" ? provider.apiKey : process.env.OPENROUTER_API_KEY;
-  if (openRouterKey || provider?.provider === "openrouter") {
-    const key = openRouterKey || process.env.OPENROUTER_API_KEY;
-    if (!key) throw new Error("OPENROUTER_API_KEY is not set. Get a free key at openrouter.ai");
-    return chatOpenAICompatible(OPENROUTER_BASE, key, "OpenRouter AI", messages, opts, DEFAULT_OPENROUTER_MODEL);
+  const openRouterKey = providerType === "openrouter" ? provider?.apiKey : process.env.OPENROUTER_API_KEY;
+  if (openRouterKey || providerType === "openrouter") {
+    if (!openRouterKey) throw new Error("OPENROUTER_API_KEY is not set. Get a free key at openrouter.ai");
+    return chatOpenAICompatible(OPENROUTER_BASE, openRouterKey, "OpenRouter AI", messages, opts, DEFAULT_OPENROUTER_MODEL);
   }
 
   if (provider?.provider === "anthropic" && provider.apiKey) {
