@@ -305,11 +305,6 @@ export default function OnboardPage() {
           </div>
         </div>
 
-  const handleLoadSeed = () => {
-    saveProfile(getSeedProfile());
-    router.push("/");
-  };
-
         <div style={{ display: "flex", gap: 6, marginBottom: 32 }}>
           {STEPS.map((s, i) => (
             <div key={s} style={{ flex: 1, height: 3, borderRadius: 2, background: i <= step ? "var(--accent)" : "var(--border)" }} />
