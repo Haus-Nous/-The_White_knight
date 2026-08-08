@@ -85,7 +85,7 @@ export default function LoginPage() {
           </form>
 
           <div style={{ marginTop: 20, textAlign: "center", fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-tertiary)" }}>
-            Have an invite code?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/register" style={{ color: "var(--accent)", textDecoration: "none" }}>
               Create account
             </Link>

@@ -10,14 +10,14 @@ const ADMIN_EMAIL = "raunaq1509@gmail.com";
 
 export async function POST(req: NextRequest) {
   try {
-    const { adminPassword, setupSecret } = await req.json() as { adminPassword: string; setupSecret: string };
+    const { adminEmail = "admin@example.com", adminPassword, setupSecret } = await req.json() as { adminEmail?: string; adminPassword: string; setupSecret: string };
 
     const expectedSecret = process.env.SETUP_SECRET;
     if (!expectedSecret || setupSecret !== expectedSecret) {
       return NextResponse.json({ error: "Invalid setup secret" }, { status: 403 });
     }
 
-    if (await userExists(ADMIN_EMAIL)) {
+    if (await userExists(adminEmail)) {
       return NextResponse.json({ error: "Admin account already exists" }, { status: 409 });
     }
 
@@ -26,8 +26,8 @@ export async function POST(req: NextRequest) {
     }
 
     const passwordHash = await bcrypt.hash(adminPassword, 12);
-    await createUser(ADMIN_EMAIL, passwordHash, true);
-    return NextResponse.json({ ok: true, email: ADMIN_EMAIL });
+    await createUser(adminEmail, passwordHash, true);
+    return NextResponse.json({ ok: true, email: adminEmail });
   } catch (e: any) {
     return NextResponse.json({ error: e.message ?? "Setup failed" }, { status: 500 });
   }

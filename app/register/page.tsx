@@ -53,10 +53,6 @@ function RegisterForm() {
         </div>
 
         <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "var(--radius)", padding: 32 }}>
-          <div style={{ background: "rgba(255,165,0,0.06)", border: "1px solid rgba(255,165,0,0.2)", padding: "10px 14px", borderRadius: "var(--radius)", marginBottom: 20, fontSize: "0.75rem", color: "var(--text-secondary)", fontFamily: "var(--font-mono)", lineHeight: 1.5 }}>
-            This app is invite-only. You need an invite code from Raunaq to create an account.
-          </div>
-
           {error && (
             <div style={{ background: "rgba(255,50,50,0.1)", border: "1px solid var(--error)", padding: "10px 14px", borderRadius: "var(--radius)", marginBottom: 20, fontSize: "0.8rem", color: "var(--error)", fontFamily: "var(--font-mono)" }}>
               {error}
@@ -64,17 +60,6 @@ function RegisterForm() {
           )}
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <div>
-              <label className="label" style={{ display: "block", marginBottom: 6 }}>INVITE CODE</label>
-              <input
-                type="text"
-                value={inviteCode}
-                onChange={e => setInviteCode(e.target.value.toUpperCase())}
-                required
-                placeholder="XXXXXXXX"
-                style={{ width: "100%", padding: "10px 12px", background: "var(--bg-primary)", border: "1px solid var(--border)", color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontSize: "0.875rem", borderRadius: "var(--radius)", letterSpacing: "0.15em" }}
-              />
-            </div>
             <div>
               <label className="label" style={{ display: "block", marginBottom: 6 }}>EMAIL</label>
               <input

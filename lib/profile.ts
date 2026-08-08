@@ -120,17 +120,17 @@ export function hasProfile(): boolean {
 
 export function getSeedProfile(): Profile {
   return {
-    name: "Raunaq Rakesh",
-    headline: "Strategy consultant and AI builder — 7+ years across MBB consulting, growth advisory, and entrepreneurship, with a working portfolio of agentic AI systems shipped into real engagements.",
-    email: "raunaq1509@gmail.com",
-    secondaryEmail: "raunaq6655@gmail.com",
-    phone: "+91-7982271861",
-    location: "Gurgaon, India",
-    locationsOpenTo: "Mumbai, Bangalore, Dubai, Abu Dhabi, Doha, Remote",
-    linkedin: "linkedin.com/in/raunaqrakesh",
-    github: "github.com/Raunaq-nous",
-    portfolio: "raunaq-nous.github.io/raunaq-portfolio/builds",
-    yearsOfExperience: "7+",
+    name: "Alex Morgan",
+    headline: "AI Engineer & Strategy Lead with experience building production applications and data pipelines.",
+    email: "alex.morgan@example.com",
+    secondaryEmail: "",
+    phone: "+1 (555) 019-2834",
+    location: "San Francisco, CA",
+    locationsOpenTo: "San Francisco, New York, London, Remote",
+    linkedin: "linkedin.com/in/example",
+    github: "github.com/example",
+    portfolio: "example.com",
+    yearsOfExperience: "5+",
     experience: [
       {
         id: "bain-2025",

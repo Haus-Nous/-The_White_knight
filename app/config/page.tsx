@@ -8,13 +8,13 @@ const buckets = [
 ];
 
 const profile = {
-  name: "Raunaq Rakesh",
-  email: "raunaq1509@gmail.com",
-  phone: "+91-7982271861",
-  location: "Gurgaon, India",
-  linkedin: "linkedin.com/in/raunaqrakesh",
-  portfolio: "raunaqrakesh.com",
-  github: "github.com/Raunaq-nous",
+  name: "Alex Morgan",
+  email: "alex.morgan@example.com",
+  phone: "+1 (555) 019-2834",
+  location: "San Francisco, CA",
+  linkedin: "linkedin.com/in/example",
+  portfolio: "example.com",
+  github: "github.com/example",
 };
 
 const portals = [

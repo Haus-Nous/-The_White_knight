@@ -7,22 +7,21 @@ export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password, inviteCode } = await req.json() as { email: string; password: string; inviteCode: string };
+    const { email, password, inviteCode } = await req.json() as { email: string; password: string; inviteCode?: string };
 
-    if (!email || !password || !inviteCode) {
-      return NextResponse.json({ error: "Email, password, and invite code are required" }, { status: 400 });
+    if (!email || !password) {
+      return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
     if (password.length < 8) {
       return NextResponse.json({ error: "Password must be at least 8 characters" }, { status: 400 });
     }
 
-    // Validate invite code
-    const invite = await getInviteCode(inviteCode.trim());
-    if (!invite) {
-      return NextResponse.json({ error: "Invalid invite code" }, { status: 400 });
-    }
-    if (invite.used) {
-      return NextResponse.json({ error: "This invite code has already been used" }, { status: 400 });
+    // Optional invite code validation if provided
+    if (inviteCode && inviteCode.trim()) {
+      const invite = await getInviteCode(inviteCode.trim());
+      if (invite && !invite.used) {
+        await markInviteUsed(inviteCode.trim(), email);
+      }
     }
 
     // Check if user already exists
@@ -32,7 +31,6 @@ export async function POST(req: NextRequest) {
 
     const passwordHash = await bcrypt.hash(password, 12);
     await createUser(email, passwordHash, false);
-    await markInviteUsed(inviteCode.trim(), email);
 
     const token = await signSession({ email: email.toLowerCase(), isAdmin: false });
     const res = NextResponse.json({ ok: true, email: email.toLowerCase() });

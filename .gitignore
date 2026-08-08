@@ -31,3 +31,8 @@ extracted/
 extracted-files/
 persona-unzipped/
 tsconfig.tsbuildinfo
+
+# Agent internal state
+.claude/
+.agent/
+.vercel/
