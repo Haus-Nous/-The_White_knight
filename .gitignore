@@ -1,18 +1,33 @@
+# Dependency directories
+node_modules/
+.pnpm-store/
+
+# Next.js build output
+.next/
+out/
+build/
+dist/
+
+# Environment files and credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+secrets/
+*.secret
+*.pem
+
+# Generated & temporary archives / cache
 *.pdf
 *.docx
 *.zip
 __pycache__/
 .cache/
-node_modules/
-.next/
-out/
-.env
-.env.local
-.env.*.local
-secrets/
-*.secret
 .DS_Store
 Thumbs.db
 extracted/
 extracted-files/
+persona-unzipped/
 tsconfig.tsbuildinfo
