@@ -36,3 +36,5 @@ tsconfig.tsbuildinfo
 .claude/
 .agent/
 .vercel/
+.vercel
+.env*

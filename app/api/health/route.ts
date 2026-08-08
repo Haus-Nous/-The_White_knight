@@ -6,9 +6,10 @@ export const runtime = "nodejs";
 export async function GET() {
   const results: Record<string, any> = {
     env: {
-      TOGETHER_API_KEY: process.env.TOGETHER_API_KEY ? `set (${process.env.TOGETHER_API_KEY.slice(0, 6)}...)` : "MISSING",
-      AI_MODEL: process.env.AI_MODEL ?? "not set — using default deepseek-ai/DeepSeek-V4-Pro",
-      AI_VISION_MODEL: process.env.AI_VISION_MODEL ?? "not set — using default",
+      GROQ_API_KEY: process.env.GROQ_API_KEY ? `set (${process.env.GROQ_API_KEY.slice(0, 6)}...)` : "not set",
+      OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY ? `set (${process.env.OPENROUTER_API_KEY.slice(0, 6)}...)` : "not set",
+      TOGETHER_API_KEY: process.env.TOGETHER_API_KEY ? `set (${process.env.TOGETHER_API_KEY.slice(0, 6)}...)` : "not set",
+      AI_MODEL: process.env.AI_MODEL ?? "default",
     },
     modelTest: null,
     error: null,
