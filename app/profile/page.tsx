@@ -115,8 +115,8 @@ export default function ProfilePage() {
                     </div>
                     {exp.bullets && (
                       <ul style={{ margin: "10px 0 0 0", paddingLeft: 18, fontSize: "0.8125rem", color: "var(--text-secondary)", lineHeight: 1.65 }}>
-                        {exp.bullets.split("\n").filter(b => b.trim()).map((b, i) => (
-                          <li key={i} style={{ marginBottom: 4 }}>{b.trim()}</li>
+                        {(Array.isArray(exp.bullets) ? exp.bullets : (typeof exp.bullets === "string" ? exp.bullets.split("\n") : [])).filter(Boolean).map((b, i) => (
+                          <li key={i} style={{ marginBottom: 4 }}>{String(b).trim()}</li>
                         ))}
                       </ul>
                     )}

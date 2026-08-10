@@ -84,7 +84,10 @@ export type SkillBuilderResult = {
 export function buildProfileContext(profile: Profile): string {
   // ALL experiences, ALL bullets — never slice
   const expFull = profile.experience.map(e => {
-    const bullets = e.bullets.split("\n").filter(b => b.trim()).map(b => `  - ${b.trim()}`).join("\n");
+    const bulletLines = Array.isArray(e.bullets)
+      ? e.bullets
+      : (typeof e.bullets === "string" ? e.bullets.split("\n") : []);
+    const bullets = bulletLines.filter(b => typeof b === "string" && b.trim()).map(b => `  - ${b.trim()}`).join("\n");
     return `${e.role} | ${e.company} | ${e.tenure}${e.location ? ` | ${e.location}` : ""}
 ${bullets}`;
   }).join("\n\n");
