@@ -121,4 +121,4 @@ graph TD
 
 ## 🤖 AI Tools Used
 
-[AI DISCLOSURE — finalize wording before submission]
+AI tools were used both in developing this project and at runtime to power its core features — see [AI_USAGE.md](./AI_USAGE.md) for full details.
