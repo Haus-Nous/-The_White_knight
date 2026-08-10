@@ -1,61 +1,87 @@
 # The White Knight ⚔️
 
-> An AI-Powered Personal Job Application Command Center for Autonomous Candidate Sourcing, Scoring, and Application Tailoring.
+An AI-powered personal job application command center for autonomous sourcing, ATS fit scoring, and tailored document generation.
+
+🚀 **Live Demo**: [https://the-white-knight-theta.vercel.app](https://the-white-knight-theta.vercel.app)
 
 ---
 
-## 🚀 Overview
+## 📌 The Problem
 
-**The White Knight** (CareerOS) is a modern, full-stack Next.js web application that serves as an intelligent job application command center. It empowers job seekers by automating company research, ATS resume scoring, cover letter drafting, and interactive application form Q&A generation using state-of-the-art LLM integrations.
+Managing job applications manually across dozens of company portals is fragmented, repetitive, and opaque. Job seekers spend hours re-typing profile data, tailoring resumes in isolation, and guessing whether their skills align with ATS filters or company requirements. Without a unified system to track applications, analyze fit metrics, and automate document drafting, candidate effort is wasted on administrative overhead instead of strategic career decisions.
 
 ---
 
-## ✨ Key Features
+## ⚙️ What It Does
 
-- 🎯 **ATS Fit Scoring & Analysis**: Quantitative scoring of candidate profile alignment against job descriptions with actionable gap analysis.
-- 📄 **Document Generation**: Tailor resumes, cover letters, executive summaries, and strategic problem-solver pitches tailored to target roles.
-- 💬 **Interactive Form Question Answerer**: AI-generated answers for complex application portal questions grounded in your master career persona.
-- 🔎 **Automated Company Research**: Deep research integration (via Exa API) to retrieve realtime background information on target employers.
-- 👤 **Dynamic Profile Enrichment**: Automatically detects new experience or skills from user notes and updates the candidate persona corpus.
-- ⚡ **Realtime Model Switching**: Supports multi-provider AI backends including Together AI, Anthropic Claude, and OpenAI APIs.
+- **Job Ingestion & Sourcing**: Import job descriptions via direct URL, raw text paste, or automated career portal scanning.
+- **Multi-Axis AI Fit Scoring**: Quantitatively evaluate candidate profiles against job requirements across technical skills, experience depth, domain alignment, and compensation criteria.
+- **Posting Legitimacy & Risk Checking**: Analyze job posting metadata and company signals to flag suspicious listings or high-turnover roles before applying.
+- **Tailored Document Generation**: Instantly generate customized resumes, targeted cover letters, executive summaries, and strategic problem-solver pitches.
+- **Interactive Form Q&A**: Produce candidate-grounded answers for complex job application portal questions.
+- **Application Pipeline Tracking**: Centralized dashboard to track application status, outreach history, and target role buckets.
+
+---
+
+## 📐 Architecture Diagram
+
+```mermaid
+graph TD
+    subgraph Ingestion["1. Ingestion Layer"]
+        A[Job Description / URL / Portal Scan] --> B[Raw Input Parser]
+    end
+
+    subgraph Processing["2. Processing & Analysis Engine"]
+        B --> C[Structured Field Extractor]
+        C --> D[Multi-Axis Fit Scoring Engine]
+        C --> E[Posting Legitimacy & Risk Checker]
+    end
+
+    subgraph Generation["3. Document & Response Generator"]
+        D --> F[Tailored Resume Generator]
+        D --> G[Cover Letter & Pitch Generator]
+        D --> H[Application Form Q&A Generator]
+    end
+
+    subgraph Storage["4. Persistence & Tracking Layer"]
+        E --> I[Redis / Upstash KV Database]
+        F --> I
+        G --> I
+        H --> I
+        I --> J[Candidate Application Pipeline Dashboard]
+    end
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/) (App Router, Server API Routes)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS, CSS Glassmorphism & Micro-animations
-- **Database / Cache**: Redis (Upstash Redis / Vercel KV)
-- **AI Integrations**: Together AI API, Anthropic API, OpenAI API, Exa.ai API
-- **Deployment**: Vercel Serverless
+| Layer | Technologies & Libraries |
+|---|---|
+| **Frontend & Framework** | [Next.js](https://nextjs.org/) (v16 App Router), React 19, TypeScript, Vanilla CSS & Glassmorphism |
+| **AI / LLM Integration** | Groq API (`Llama 3.3 70B`), OpenRouter API, Together AI (`DeepSeek V4 Pro`), Anthropic API, OpenAI API |
+| **Data Storage & State** | Upstash Redis / Vercel KV (`@upstash/redis`), Browser LocalStorage |
+| **Parsing & Utilities** | `pdf-parse` (resume text extraction), `bcryptjs` (password hashing), `jose` (JWT sessions) |
+| **Deployment & Hosting** | Vercel Serverless Runtime |
 
 ---
 
-## ⚙️ Environment Variables & Configuration
+## 🖼️ Screenshots
 
-Copy `.env.example` to `.env.local` and set the appropriate credentials:
+> ℹ️ *Note: Add your interface screenshots to the paths specified below.*
 
-```bash
-# Redis Storage (Upstash or Vercel KV)
-KV_REST_API_URL="https://your-upstash-redis-url.upstash.io"
-KV_REST_API_TOKEN="your-upstash-redis-token"
+* **Pipeline Dashboard**:
+  ![Pipeline Dashboard](./docs/screenshots/dashboard.png)
 
-# AI Model Provider API Keys
-TOGETHER_API_KEY="your-together-ai-key"
-ANTHROPIC_API_KEY="your-anthropic-api-key"      # Optional fallback provider
-OPENAI_API_KEY="your-openai-api-key"            # Optional fallback provider
-EXA_API_KEY="your-exa-api-key"                  # Optional company research provider
+* **Generated Fit Score**:
+  ![Generated Fit Score](./docs/screenshots/fit-score.png)
 
-# App Authentication Secret
-AUTH_SECRET="your-random-jwt-secret-key"
-```
-
-> ⚠️ **Security Notice**: Never commit actual API keys or secrets to git. All credentials should be stored securely in your deployment provider's environment settings.
+* **Tailored Resume Generator**:
+  ![Tailored Resume Generator](./docs/screenshots/tailored-resume.png)
 
 ---
 
-## 💻 Local Development Setup
+## 💻 Local Setup Instructions
 
 1. **Clone the repository**:
    ```bash
@@ -68,16 +94,31 @@ AUTH_SECRET="your-random-jwt-secret-key"
    npm install
    ```
 
-3. **Run the development server**:
+3. **Configure Environment Variables**:
+   Copy `.env.example` to `.env.local` and set your credentials:
+   ```bash
+   cp .env.example .env.local
+   ```
+   *(Refer to [.env.example](.env.example) for the full list of required and optional environment variables).*
+
+4. **Run the development server**:
    ```bash
    npm run dev
    ```
+   Open `http://localhost:3000` in your browser.
 
-4. **Open in browser**:
-   Navigate to `http://localhost:3000` to view the application.
+> ⚠️ **Note**: A running Redis/KV database instance (Upstash or Vercel KV) and a valid AI provider API key (such as a free `GROQ_API_KEY` from [console.groq.com](https://console.groq.com)) are required for the application to function locally.
 
 ---
 
-## 🤖 AI Tool Declaration
+## 🔮 Vision
 
-For details on the generative AI tools used during development and runtime architecture, please refer to [AI_USAGE.md](AI_USAGE.md).
+- **Historical Application Analytics**: Leveraging accumulated application data to identify skill gaps and recommend high-impact learning paths.
+- **Portable Candidate Record**: Evolving into an open, candidate-owned professional capability ledger that integrates across hiring platforms.
+- **Autonomous Opportunity Matching**: Transitioning from candidate-initiated searches to continuous background matching against verified high-fit roles.
+
+---
+
+## 🤖 AI Tools Used
+
+[AI DISCLOSURE — finalize wording before submission]
