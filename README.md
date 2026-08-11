@@ -68,8 +68,6 @@ graph TD
 
 ## 🖼️ Screenshots
 
-> ℹ️ *Note: Add your interface screenshots to the paths specified below.*
-
 * **Pipeline Dashboard**:
   ![Pipeline Dashboard](./docs/screenshots/dashboard.png)
 
@@ -85,8 +83,8 @@ graph TD
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Haus-Nous/-The_White_knight.git
-   cd -The_White_knight
+   git clone https://github.com/Haus-Nous/-The_White_knight.git the-white-knight
+   cd the-white-knight
    ```
 
 2. **Install dependencies**:
